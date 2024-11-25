@@ -12,6 +12,9 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role', ['user', 'admin', 'developer'])->default('user');
+            $table->string('avatar')->nullable();
+            $table->string('national_id', 10)->nullable();
+            $table->string('mobile', 15)->nullable();
         });
     }
 
@@ -22,6 +25,9 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role');
+            $table->dropColumn('avatar');
+            $table->dropColumn('national_id');
+            $table->dropColumn('mobile');
         });
     }
 };
