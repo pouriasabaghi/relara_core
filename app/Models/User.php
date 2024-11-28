@@ -55,7 +55,7 @@ class User extends Authenticatable
     public function name(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?: 'Unknown',
+            get: fn($value) => $value ?: '',
         );
     }
 }
