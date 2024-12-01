@@ -29,13 +29,13 @@ class CategoryService
     /**
      * Summary of getCategoryById
      * @param int $id
-     * @return array
+     * @param Category|null 
      */
-    public function getCategoryById(int $id): array
+    public function getCategoryById(int $id): Category|null
     {
         $category = Category::with('children')->find($id);
 
-        return $category->toArray();
+        return $category;
     }
 
     /**
