@@ -16,6 +16,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::apiResource('/users', App\Http\Controllers\api\v1\UserController::class)->middleware('auth:sanctum');
+        Route::get('categories/all', [App\Http\Controllers\api\v1\CategoryController::class, 'allCategories']);
         Route::apiResource('categories', App\Http\Controllers\api\v1\CategoryController::class);
     });
 });

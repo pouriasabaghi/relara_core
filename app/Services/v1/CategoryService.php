@@ -3,6 +3,7 @@
 namespace App\Services\v1;
 
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService
 {
@@ -41,8 +42,12 @@ class CategoryService
     /**
      * Get categories with their nested children.
      */
-    public function getCategoriesWithChildren()
+    public function getCategoriesWithChildren(): Collection
     {
         return Category::with('children')->whereNull('parent_id')->get();
+    }
+
+    public function getAllCategories(): Collection{
+        return Category::all();
     }
 }

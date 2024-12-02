@@ -24,6 +24,12 @@ class CategoryController extends Controller
         return response()->json(CategoryResource::collection($categories));
     }
 
+    public function allCategories()
+    {
+        $allCategories = $this->categoryService->getAllCategories();
+        return response()->json($allCategories);
+    }
+
 
     public function store(CategoryRequest $request): JsonResponse
     {
