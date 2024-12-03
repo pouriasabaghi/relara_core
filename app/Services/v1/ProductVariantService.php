@@ -15,8 +15,8 @@ class ProductVariantService
     {
         $variant = ProductVariant::create([
             'product_id' => $data['product_id'],
-            'price' => $data['price'],
-            'stock' => $data['stock'] ?? null,
+            'price' => $data['price'] ?? 0,
+            'stock' => $data['stock'] ?? 0,
             'status' => $data['status'] ?? 'available',
         ]);
 
@@ -35,12 +35,10 @@ class ProductVariantService
         $variant = $this->getById($id);
 
         $variant->update([
-            'price' => $data['price'],
-            'stock' => $data['stock'] ?? null,
+            'price' => $data['price'] ?? 0,
+            'stock' => $data['stock'] ?? 0,
             'status' => $data['status'] ?? 'available',
         ]);
-
-        $variant->attributeValues()->sync($data['attribute_values']);
 
         return $variant;
     }

@@ -7,6 +7,7 @@ use App\Http\Requests\v1\ProductVariantRequest;
 use App\Http\Resources\v1\ProductVariantResource;
 use App\Services\v1\ProductVariantService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductVariantController extends Controller
 {
@@ -26,7 +27,7 @@ class ProductVariantController extends Controller
     public function store(ProductVariantRequest $request): JsonResponse
     {
         $variant = $this->productVariantService->create($request->validated());
-        return response()->json(new ProductVariantResource($variant), 201);
+        return response()->json(new ProductVariantResource($variant), Response::HTTP_CREATED);
     }
 
     public function show($id): JsonResponse
@@ -37,13 +38,21 @@ class ProductVariantController extends Controller
 
     public function update(ProductVariantRequest $request, $id): JsonResponse
     {
-        $variant = $this->productVariantService->update($id, $request->validated());
-        return response()->json(new ProductVariantResource($variant));
+        try {
+            $variant = $this->productVariantService->update($id, $request->validated());
+            return response()->json(new ProductVariantResource($variant));
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+            ], $th->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function destroy($id): JsonResponse
     {
         $this->productVariantService->delete($id);
-        return response()->json(null, 204);
+        return response()->json(data: [
+            'message' => 'Product variant deleted',
+        ]);
     }
 }

@@ -21,13 +21,18 @@ class ProductVariantRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'product_id' => 'required|exists:products,id',
-            'attribute_values' => 'required|array',
-            'attribute_values.*' => 'exists:attribute_values,id',
-            'price' => 'required|numeric|min:0',
+        $rules = [
+            'price' => 'nullable|numeric|min:0',
             'stock' => 'nullable|integer|min:0',
             'status' => 'nullable|string|in:available,unavailable,call',
         ];
+
+        if ($this->method() === 'POST') {
+            $rules['product_id'] = 'required|exists:products,id';
+            $rules['attribute_values'] = 'required|array';
+            $rules['attribute_values.*'] = 'exists:attribute_values,id';
+        }
+
+        return $rules;
     }
 }
