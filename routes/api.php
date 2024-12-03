@@ -18,5 +18,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('/users', App\Http\Controllers\api\v1\UserController::class)->middleware('auth:sanctum');
         Route::get('categories/all', [App\Http\Controllers\api\v1\CategoryController::class, 'allCategories']);
         Route::apiResource('categories', App\Http\Controllers\api\v1\CategoryController::class);
+        Route::apiResource('attributes', App\Http\Controllers\api\v1\AttributeController::class);
+        Route::apiResource('attribute-values', App\Http\Controllers\api\v1\AttributeValueController::class);
+        Route::apiResource('products', App\Http\Controllers\api\v1\ProductController::class);
+        Route::apiResource('product-variants', App\Http\Controllers\api\v1\ProductVariantController::class);
     });
 });
