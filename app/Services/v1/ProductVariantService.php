@@ -3,6 +3,7 @@
 namespace App\Services\v1;
 
 use App\Models\ProductVariant;
+use ProductStatusEnum;
 
 class ProductVariantService
 {
@@ -17,7 +18,7 @@ class ProductVariantService
             'product_id' => $data['product_id'],
             'price' => $data['price'] ?? 0,
             'stock' => $data['stock'] ?? 0,
-            'status' => $data['status'] ?? 'available',
+            'status' => $data['status'] ?? ProductStatusEnum::Available->value,
         ]);
 
         $variant->attributeValues()->sync($data['attribute_values']);

@@ -15,7 +15,7 @@ class ProductService
     {
         $product = Product::create([
             'name' => $data['name'],
-            'description' => $data['description'] ?? null,
+            'desc' => $data['desc'] ?? null,
         ]);
 
         if (!empty($data['categories'])) {
