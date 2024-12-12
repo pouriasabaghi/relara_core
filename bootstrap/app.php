@@ -50,4 +50,8 @@ return Application::configure(basePath: dirname(__DIR__))
                 'errors' => [$e->getMessage()],
             ], $e->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
         });
-    })->create();
+    })
+    ->withCommands([
+        __DIR__.'/../app/Domain/Orders/Commands',
+    ])
+    ->create();
