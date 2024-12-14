@@ -24,6 +24,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'images' => 'nullable|array',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
         ];

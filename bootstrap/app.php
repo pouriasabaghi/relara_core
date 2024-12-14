@@ -37,19 +37,19 @@ return Application::configure(basePath: dirname(__DIR__))
             ], Response::HTTP_METHOD_NOT_ALLOWED);
         });
 
-        $exceptions->render(function (\BadMethodCallException $e) {
+        /* $exceptions->render(function (\BadMethodCallException $e) {
             return response()->json([
                 'message' => 'Bad method call',
                 'errors' => ['Bad method call'],
             ], Response::HTTP_BAD_REQUEST);
-        });
+        }); */
 
-        $exceptions->render(function (\Throwable $e) {
+       /*  $exceptions->render(function (\Throwable $e) {
             return response()->json([
                 'message' => $e->getMessage(),
                 'errors' => [$e->getMessage()],
             ], $e->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
-        });
+        }); */
     })
     ->withCommands([
         __DIR__.'/../app/Domain/Orders/Commands',

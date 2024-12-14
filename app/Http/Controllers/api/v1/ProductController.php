@@ -53,6 +53,7 @@ class ProductController extends Controller
         ]);
     }
 
+
     public function destroy($id): JsonResponse
     {
         $this->productService->delete($id);

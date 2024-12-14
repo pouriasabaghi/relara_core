@@ -20,4 +20,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('is_primary', 'desc');
+    }
+
+    public function primaryImage()
+    {
+        return $this->hasOne(ProductImage::class)->where('is_primary', true);
+    }
 }

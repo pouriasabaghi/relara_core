@@ -13,6 +13,8 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'variants' => ProductVariantResource::collection($this->whenLoaded('variants')),
+            'primary_image' => ProductImageResource::make($this->primaryImage),
+            'images' => ProductImageResource::collection($this->whenLoaded('images')),
         ];
     }
 }

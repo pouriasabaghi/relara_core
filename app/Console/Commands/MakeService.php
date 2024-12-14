@@ -51,7 +51,7 @@ class MakeService extends Command
         File::put($filePath, $stub);
 
         // success message
-        $this->send("Service {$filePath} created successfully.");
+        $this->info("Service {$filePath} created successfully.");
         return 0;
     }
 }

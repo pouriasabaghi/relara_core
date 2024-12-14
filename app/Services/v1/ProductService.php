@@ -6,9 +6,13 @@ use App\Models\Product;
 
 class ProductService
 {
+    protected $productImageService;
+    public function __construct(){
+        $this->productImageService = new ProductImageService();
+    }
     public function getAll()
     {
-        return Product::with(['categories', 'variants'])->get();
+        return Product::with(['categories', 'variants', 'images'])->get();
     }
 
     public function create(array $data): Product
@@ -20,6 +24,10 @@ class ProductService
 
         if (!empty($data['categories'])) {
             $product->categories()->sync($data['categories']);
+        }
+
+        if(!empty($data['images'])) {
+            $this->productImageService->create($product, $data['images']);
         }
 
         return $product;
@@ -41,6 +49,10 @@ class ProductService
 
         if (!empty($data['categories'])) {
             $product->categories()->sync($data['categories']);
+        }
+
+        if(!empty($data['images'])) {
+            $this->productImageService->update($product, $data['images']);
         }
 
         return $product->refresh();
