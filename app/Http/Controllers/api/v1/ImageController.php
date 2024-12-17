@@ -16,6 +16,6 @@ class ImageController extends Controller
 
         $path = $imageService->upload($data['image'], 'temp');
 
-        return response()->json(['image' => url("storage/$path"), 'path' => $path]);
+        return response()->json(['url' => url("storage/$path"), 'path' => $path]);
     }
 }
