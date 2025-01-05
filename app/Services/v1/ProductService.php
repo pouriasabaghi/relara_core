@@ -35,7 +35,7 @@ class ProductService
 
     public function getById(int $id): Product
     {
-        return Product::with(['categories', 'variants'])->findOrFail($id);
+        return Product::with(['categories', 'variants', 'images'])->findOrFail($id);
     }
 
     public function update(int $id, array $data): Product
