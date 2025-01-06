@@ -47,11 +47,11 @@ class ProductService
             'description' => $data['description'] ?? null,
         ]);
 
-        if (!empty($data['categories'])) {
+        if (isset($data['categories'])) {
             $product->categories()->sync($data['categories']);
         }
 
-        if(!empty($data['images'])) {
+        if(isset($data['images'])) {
             $this->productImageService->update($product, $data['images']);
         }
 
