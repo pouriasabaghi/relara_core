@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function index(): JsonResponse
     {
-        $users = User::paginate(30);
+        $users = User::paginate(2);
         return response()->json($users);
     }
 
