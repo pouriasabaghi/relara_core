@@ -18,7 +18,7 @@ class ProductImageResource extends JsonResource
             'is_primary' => $this->is_primary,
             'path' => $this->path,
             'url' => url("storage/$this->path"),
-            'sizes'=>ImageResource::collection($this->sizes),
+            'sizes' => $this->sizes?->mapWithKeys(fn($size) => [$size->size => new ImageResource($size)]),
         ];
     }
 }
