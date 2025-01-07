@@ -23,5 +23,6 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('products', App\Http\Controllers\api\v1\ProductController::class);
         Route::apiResource('product-variants', App\Http\Controllers\api\v1\ProductVariantController::class);
         Route::post("/upload/image", [App\Http\Controllers\api\v1\ImageController::class, 'store']);
+        Route::apiResource('discount-codes', App\Http\Controllers\api\v1\DiscountCodeController::class);
     });
 });
