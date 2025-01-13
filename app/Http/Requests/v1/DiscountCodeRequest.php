@@ -30,7 +30,7 @@ class DiscountCodeRequest extends FormRequest
             'min_cart_value' => 'nullable|numeric',
             'max_discount_value' => 'nullable|numeric',
             'usage_limit' => 'nullable|numeric',
-            'expire_at' => 'numeric',
+            'expires_at' => 'numeric',
         ];
     }
 }
