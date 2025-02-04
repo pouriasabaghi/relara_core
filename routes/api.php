@@ -16,6 +16,9 @@ Route::prefix('v1')->group(function () {
 
     Route::group([], function () {
         Route::get('categories', [App\Http\Controllers\api\v1\CategoryController::class, 'index']);
+        Route::get('categories/{category}', [App\Http\Controllers\api\v1\CategoryController::class, 'showProducts']);
+        
+        Route::get('products/{product}', [App\Http\Controllers\api\v1\ProductController::class, 'show']);
     });
 
     Route::prefix('admin')->middleware('auth:admin')->group(function () {

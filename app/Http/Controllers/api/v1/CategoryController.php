@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CategoryRequest;
 use App\Http\Resources\v1\CategoryResource;
+use App\Models\Category;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,6 +44,12 @@ class CategoryController extends Controller
         return response()->json(new CategoryResource($category));
     }
 
+    public function showProducts(Category $category)
+    {
+        $products = $category->products()->paginate(16);
+        return response()->json($products);
+    }
+
     public function update(CategoryRequest $request, $id): JsonResponse
     {
         $category = $this->categoryService->saveCategory($request->validated(), $id);
@@ -55,4 +62,3 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category deleted successfully.']);
     }
 }
-
