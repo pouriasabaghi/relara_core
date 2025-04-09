@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CategoryRequest;
 use App\Http\Resources\v1\CategoryResource;
+use App\Http\Resources\v1\ProductResource;
 use App\Models\Category;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\JsonResponse;
@@ -47,7 +48,13 @@ class CategoryController extends Controller
     public function showProducts(Category $category)
     {
         $products = $category->products()->paginate(16);
-        return response()->json($products);
+        return response()->json([
+            'data' => ProductResource::collection($products),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage(),
+            'per_page' => $products->perPage(),
+            'total' => $products->total(),
+        ]);
     }
 
     public function update(CategoryRequest $request, $id): JsonResponse
