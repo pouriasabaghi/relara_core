@@ -7,7 +7,7 @@ use App\Http\Requests\v1\UserAuthRequest;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\JsonResponse;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class UserAuthController extends Controller
 {
@@ -36,7 +36,7 @@ class UserAuthController extends Controller
             return response()->json([
                 'message' => $th->getMessage(),
                 'success' => false,
-            ]);
+            ], $th->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
     public function register(UserAuthRequest $request)
@@ -55,7 +55,7 @@ class UserAuthController extends Controller
             // Check user credentials
             $user = User::where('email', $data['email'])->first();
             if (!$user || !Hash::check($data['password'], $user->password)) {
-                throw new \Exception('Invalid credentials', 401);
+                throw new \Exception('Invalid credentials', Response::HTTP_UNAUTHORIZED);
             }
 
             // Create token
@@ -68,7 +68,7 @@ class UserAuthController extends Controller
             return response()->json([
                 'message' => $th->getMessage(),
                 'success' => false,
-            ]);
+            ], $th->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -86,7 +86,7 @@ class UserAuthController extends Controller
             return response()->json([
                 'message' => $th->getMessage(),
                 'success' => false,
-            ]);
+            ], $th->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
