@@ -44,7 +44,7 @@ class ProductService
 
         $product->update([
             'name' => $data['name'],
-            'description' => $data['description'] ?? null,
+            'desc' => $data['desc'] ?? null,
         ]);
 
         if (isset($data['categories'])) {
